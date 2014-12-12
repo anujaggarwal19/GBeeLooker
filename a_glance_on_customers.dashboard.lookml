@@ -2,9 +2,6 @@
   title: A Glance On Customers
   layout: tile
   tile_size: 100
-  show_view_names: false
-
-#  filters:
 
   elements:
   
@@ -14,11 +11,11 @@
     model: customer_analysis
     explore: dim_customer
     dimensions: [dim_customer_states.customer_state_name]
-    measures: [dim_customer.count_distinct_customer_uuid]
+    measures: [dim_customer.unique_customers]
     filters:
       dim_customer_states.customer_state_name: '"PAID"'
       dim_customer.scd_end_date: 'NULL'
-    sorts: [dim_customer.count_distinct_customer_uuid desc]
+    sorts: [dim_customer.unique_customers desc]
     limit: 500
     show_null_points: true
     width: 3
@@ -30,11 +27,11 @@
     model: customer_analysis
     explore: dim_customer
     dimensions: [dim_customer_states.customer_state_name]
-    measures: [dim_customer.count_distinct_customer_uuid]
+    measures: [dim_customer.unique_customers]
     filters:
       dim_customer_states.customer_state_name: '"TRIAL"'
       dim_customer.scd_end_date: 'NULL'
-    sorts: [dim_customer.count_distinct_customer_uuid desc]
+    sorts: [dim_customer.unique_customers desc]
     limit: 500
     show_null_points: true
     width: 3
@@ -46,11 +43,11 @@
     model: customer_analysis
     explore: dim_customer
     dimensions: [dim_customer_states.customer_trial_type]
-    measures: [dim_customer.count_distinct_customer_uuid]
+    measures: [dim_customer.unique_customers]
     filters:
       dim_customer.customer_trial_type: '"FT"'
       dim_customer.scd_end_date: 'NULL'
-    sorts: [dim_customer.count_distinct_customer_uuid desc]
+    sorts: [dim_customer.unique_customers desc]
     limit: 500
     show_null_points: true
     width: 3
@@ -61,7 +58,7 @@
     type: table
     model: customer_analysis
     explore: dim_customer
-    dimensions: [dim_customer.customer_first_name,dim_customer.customer_plan_name]
+    dimensions: [dim_customer.customer_name,dim_customer.customer_plan_name]
     filters:
       dim_customer_states.customer_state_name: '"PAID"'
       dim_customer.scd_end_date: 'NULL'
@@ -78,11 +75,11 @@
     model: customer_analysis
     explore: dim_customer
     dimensions: [dim_customer.customer_plan_name]
-    measures: [dim_customer.count_distinct_customer_uuid]
+    measures: [dim_customer.unique_customers]
     filters:
       dim_customer.customer_plan_name: -EMPTY
       dim_customer.scd_end_date: 'NULL'
-    sorts: [dim_customer.count_distinct_customer_uuid desc]
+    sorts: [dim_customer.unique_customers desc]
     limit: 500
     inner_radius: 31
     width: 3
@@ -96,7 +93,7 @@
     model: customer_analysis
     explore: dim_customer
     dimensions: [dim_customer_states.customer_state_name]
-    measures: [dim_customer.count_distinct_customer_uuid]
+    measures: [dim_customer.unique_customers]
     filters:
       dim_customer_states.customer_state_key: NOT NULL
       dim_customer.scd_end_date: 'NULL'
@@ -114,7 +111,7 @@
     model: customer_analysis
     explore: dim_customer
     dimensions: [dim_customer.customer_trial_type]
-    measures: [dim_customer.count_distinct_customer_uuid]
+    measures: [dim_customer.unique_customers]
     filters:
       dim_customer.customer_trial_type: -"NA"
       dim_customer.scd_end_date: 'NULL'
@@ -132,11 +129,11 @@
     model: customer_analysis
     explore: dim_customer
     dimensions: [dim_customer.customer_zip]
-    measures: [dim_customer.count_distinct_customer_uuid]
+    measures: [dim_customer.unique_customers]
     filters:
     dim_customer.customer_zip: -"0"
     dim_customer.scd_end_date: 'NULL'
-    sorts: [dim_customer.count_distinct_customer_uuid desc]
+    sorts: [dim_customer.unique_customers desc]
     limit: 5000
     quantize_colors: true
     colors: [Blue]
@@ -156,12 +153,12 @@
     model: customer_analysis
     explore: dim_customer
     dimensions: [dim_customer.customer_zip]
-    measures: [dim_customer.count_distinct_customer_uuid]
+    measures: [dim_customer.unique_customers]
     filters:
     dim_customer.customer_zip: -"0"
     dim_customer.scd_end_date: 'NULL'
     dim_customer.customer_state_key: '3'
-    sorts: [dim_customer.count_distinct_customer_uuid desc]
+    sorts: [dim_customer.unique_customers desc]
     limit: 5000
     quantize_colors: true
     colors: [Blue]
@@ -174,5 +171,21 @@
     map: usa
     map_projection: ''
     loading: false
+    
+  - name: Customers By Duration
+    title: Customers By Duration
+    model: customer_analysis
+    type: table
+    explore: dim_customer
+    dimensions: [dim_customer_states.customer_state_name, dim_customer.current_tenure_month, dim_customer.scd_end_date]
+    pivots: [dim_customer_states.customer_state_name]
+    measures: [dim_customer.unique_customers]
+    filters:
+      dim_customer.scd_end_date: 'NULL'
+    sorts: [dim_customer.current_tenure_month desc]
+    limit: 500
+    show_view_names: false
+    width : 12
+    height : 4
 
 

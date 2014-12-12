@@ -156,7 +156,7 @@
     type: count
     drill_fields: [customer_name, customer_shipping_name, customer_first_name, customer_last_name, customer_plan_name]
     
-  - measure : count_distinct_customer_uuid
+  - measure : unique_customers
     type: count_distinct
     sql : ${customer_uuid}
     detail: [customer_name, customer_first_name, customer_last_name, customer_plan_name]
