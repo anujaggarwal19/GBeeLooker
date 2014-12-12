@@ -126,6 +126,7 @@
     sql: ${TABLE}.customer_uuid
 
   - dimension: customer_zip
+    type: int
     sql: ${TABLE}.customer_zip
 
   - dimension: previous_customer_state_key
