@@ -2,6 +2,7 @@
   title: A Glance On Customers
   layout: tile
   tile_size: 100
+  show_view_names: false
 
 #  filters:
 
@@ -166,7 +167,7 @@
     colors: [Blue]
     empty_color: Gray
     point_color: Green
-    map_color: [Blue]
+    map_color: Black
     outer_border_color: White
     inner_border_color: White
     inner_border_width: 2
