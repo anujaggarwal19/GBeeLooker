@@ -149,8 +149,8 @@
     map_projection: ''
     loading: false
     
-  - name: Geographic Distribution Of Customers
-    title: Geographic Distribution Of Customers
+  - name: Geographic Distribution Of Paid Customers
+    title: Geographic Distribution Of Paid Customers
     type: looker_geo_coordinates
     model: customer_analysis
     explore: dim_customer
@@ -166,7 +166,7 @@
     colors: [Blue]
     empty_color: Gray
     point_color: Green
-    map_color: Red
+    map_color: [Blue]
     outer_border_color: White
     inner_border_color: White
     inner_border_width: 2
