@@ -124,4 +124,28 @@
     inner_radius: 31
     width: 3
     height: 3
+    
+  - name: Geographic Distribution Of Customers
+    title: Geographic Distribution Of Customers
+    type: looker_geo_coordinates
+    model: customer_analysis
+    explore: dim_customer
+    dimensions: [dim_customer.customer_zip]
+    measures: [dim_customer.count_distinct_customer_uuid]
+    filters:
+    dim_customer.customer_zip: -"0"
+    dim_customer.scd_end_date: 'NULL'
+    sorts: [dim_customer.count_distinct_customer_uuid desc]
+    limit: 5000
+    quantize_colors: true
+    colors: [Blue]
+    empty_color: Gray
+    point_color: Green
+    map_color: Red
+    outer_border_color: White
+    inner_border_color: White
+    inner_border_width: 2
+    map: usa
+    map_projection: ''
+    loading: false
 

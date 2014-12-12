@@ -126,8 +126,8 @@
     sql: ${TABLE}.customer_uuid
 
   - dimension: customer_zip
-    type: int
-    sql: ${TABLE}.customer_zip
+    type: zipcode
+    sql: CAST(${TABLE}.customer_zip as UNSIGNED)
 
   - dimension: previous_customer_state_key
     type: int
